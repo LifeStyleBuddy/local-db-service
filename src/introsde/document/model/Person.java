@@ -185,6 +185,8 @@ public class Person implements Serializable {
     public static Person savePerson(Person p) {
     	List<Measure> m = p.getCurrentHealth();
     	p.setCurrentHealth(null);
+    	List<Goal> g = p.getCurrentGoal();
+    	p.setCurrentGoal(null);
     	EntityManager em = LifeCoachDao.instance.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -195,6 +197,10 @@ public class Person implements Serializable {
         	m.get(i).setPerson(p);
         	Measure.updateMeasure(m.get(i));
         }
+        for(int i = 0;i<g.size();i++){
+        	g.get(i).setPerson(p);
+        	Goal.updateGoal(g.get(i));
+        }
         return p;
     } 
 
@@ -202,6 +208,9 @@ public class Person implements Serializable {
     	System.out.println(p);
     	List<Measure> m = Person.getPersonById(p.getIdPerson()).getHealthHistory();
     	p.setHealthHistory(m);
+    	List<Goal> g = Person.getPersonById(p.getIdPerson()).getGoalHistory();
+    	p.setGoalHistory(g);
+    	
         EntityManager em = LifeCoachDao.instance.createEntityManager(); 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
@@ -215,6 +224,10 @@ public class Person implements Serializable {
     	List<Measure> list = p.getHealthHistory();
     	for(Measure m : list){
         	Measure.removeMeasure(m);
+        }
+    	List<Goal> lista = p.getGoalHistory();
+    	for(Goal g : lista){
+        	Goal.removeGoal(g);
         }
         EntityManager em = LifeCoachDao.instance.createEntityManager();
         EntityTransaction tx = em.getTransaction();
