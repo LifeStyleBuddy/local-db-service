@@ -141,7 +141,7 @@ public class Goal implements Serializable {
 
     public static Goal updateGoal(Goal ls) {
     	if(ls.getPerson() == null){
-    		ls.setPerson(Measure.getMeasureById(ls.getIdGoal()).getPerson());
+    		ls.setPerson(Goal.getGoalById(ls.getIdGoal()).getPerson());
     	}
         EntityManager em = LifeCoachDao.instance.createEntityManager(); 
         EntityTransaction tx = em.getTransaction();
