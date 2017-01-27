@@ -121,12 +121,12 @@ public class Person implements Serializable {
     	if(this.birthdate == null) {
     	      return null;
     	}
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         return df.format(this.birthdate);
     }
 
     public void setBirthdate(String bd) throws ParseException{
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.ENGLISH);
         Date date = format.parse(bd);
         this.birthdate = date;
     }
