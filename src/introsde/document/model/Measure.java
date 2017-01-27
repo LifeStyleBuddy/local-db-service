@@ -93,7 +93,7 @@ public class Measure implements Serializable {
     	if(this.date == null) {
     	      return null;
     	}
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         return df.format(this.date);
     }
     
@@ -103,7 +103,7 @@ public class Measure implements Serializable {
     }
 
     public void setDate(String date) throws ParseException{
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.ENGLISH);
         Date d = format.parse(date);
         this.date = d;
     }
@@ -127,7 +127,7 @@ public class Measure implements Serializable {
 
     public static Measure saveMeasure(int personId, Measure ls) throws ParseException {
     	ls.setPerson(Person.getPersonById(personId));
-    	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
     	ls.setDate(sdf.format(new Date()));
         EntityManager em = LifeCoachDao.instance.createEntityManager();
         EntityTransaction tx = em.getTransaction();
